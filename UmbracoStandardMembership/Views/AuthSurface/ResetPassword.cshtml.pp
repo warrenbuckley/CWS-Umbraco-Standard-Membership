@@ -1,18 +1,14 @@
 ﻿@using System.Web.Mvc
 @using System.Web.Mvc.Html
 @using Umbraco.Web
-@using UmbracoStandardMembership.Controllers.SurfaceControllers
-@using UmbracoStandardMembership.Models
-@model AuthModel.LoginViewModel
+@using $rootnamespace$.Models
+@using $rootnamespace$.Controllers.SurfaceControllers
+@model AuthModel.ResetPasswordViewModel
 
 @if (!ViewData.ModelState.IsValid)
 {
 
-    <h3>Forgotten your password?</h3>
-    <p>
-        Don't worry we all forget our passwords from time to time
-    </p>
-    
+    <h3>Errors</h3>
     foreach (ModelState modelState in ViewData.ModelState.Values)
     {
         var errors = modelState.Errors;
@@ -27,19 +23,14 @@
             </ul>
         }
     }
-    <p>
-        <a href="/forgotten-password">Remind me</a>
-    </p>
 }
 
-
-@using(Html.BeginUmbracoForm<AuthSurfaceController>("HandleLogin") )
+@using(Html.BeginUmbracoForm<AuthSurfaceController>("HandleResetPassword") )
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Login</legend>
-
+        <legend>Reset your Password</legend>
         
 		<div class="editor-label">
             @Html.LabelFor(model => model.EmailAddress)
@@ -59,8 +50,17 @@
             @Html.ValidationMessageFor(model => model.Password)
         </div>
         
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConfirmPassword)
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ConfirmPassword)
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+        </div>
+        
         <p>
-            <input type="submit" value="Login" />
+            <input type="submit" value="Reset Password" />
         </p>
     </fieldset>
 }

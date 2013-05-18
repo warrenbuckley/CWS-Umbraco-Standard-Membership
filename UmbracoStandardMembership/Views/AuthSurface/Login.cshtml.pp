@@ -1,8 +1,8 @@
 ﻿@using System.Web.Mvc
 @using System.Web.Mvc.Html
 @using Umbraco.Web
-@using UmbracoStandardMembership.Controllers.SurfaceControllers
-@using UmbracoStandardMembership.Models
+@using $rootnamespace$.Models
+@using $rootnamespace$.Controllers.SurfaceControllers
 @model AuthModel.LoginViewModel
 
 @if (!ViewData.ModelState.IsValid)

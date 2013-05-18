@@ -7,7 +7,7 @@ using System.Web;
 using SendGridMail;
 using SendGridMail.Transport;
 
-namespace UmbracoStandardMembership.Code
+namespace $rootnamespace$.Code
 {
     public class EmailHelper
     {

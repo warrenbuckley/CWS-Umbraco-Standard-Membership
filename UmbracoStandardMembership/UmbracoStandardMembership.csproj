@@ -221,10 +221,16 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Code\EmailHelper.cs.pp" />
     <Compile Include="Code\EmailHelper.cs" />
     <Compile Include="Controllers\SurfaceControllers\AuthSurfaceController.cs" />
+    <None Include="Controllers\SurfaceControllers\AuthSurfaceController.cs.pp" />
     <Compile Include="Models\AuthModel.cs" />
+    <None Include="Models\AuthModel.cs.pp" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Views\AuthSurface\ResetPassword.cshtml.pp" />
+    <None Include="Views\AuthSurface\Login.cshtml.pp" />
+    <None Include="Views\AuthSurface\ForgottenPassword.cshtml.pp" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,7 +1,7 @@
 ﻿@using System.Web.Mvc.Html
 @using Umbraco.Web
-@using UmbracoStandardMembership.Models
-@using UmbracoStandardMembership.Controllers.SurfaceControllers
+@using $rootnamespace$.Models
+@using $rootnamespace$.Controllers.SurfaceControllers
 @model AuthModel.ForgottenPasswordViewModel
 
 
