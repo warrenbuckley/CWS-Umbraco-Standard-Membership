@@ -1,6 +1,6 @@
 CWS Umbraco Standard Membership
 ===========================
-This is used to give an example standard membership to Umbraco V6 +
+This is used to give an example standard membership to Umbraco V6+
 
 
 Setup
@@ -30,25 +30,53 @@ Umbraco Member Setup
 ===========================
 Your member type in the Umbraco backoffice will need the following properties added to the member type:
 
-* *Name:* Joined Date Alias: joinedDate [Type: Label]
-* Name: Host Name of Last Login Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* Name: Joined Date Alias: joinedDate [Type: Label]
-* 
+<table>
+<thead>
+  <tr>
+		<th>Property Name</th>
+		<th>Property Alias</th>
+		<th>Property Type</th>
+	</tr>
+</thead>
+<tbody>
+<tr>
+	<td>Joined Date</td>
+	<td>joinedDate</td>
+	<td>Label</td>
+</tr>
+<tr>
+	<td>Host Name of Last Login</td>
+	<td>hostNameOfLastLogin</td>
+	<td>Label</td>
+</tr>
+<tr>
+	<td>IP of Last Login</td>
+	<td>iPOfLastLogin</td>
+	<td>Label</td>
+</tr>
+<tr>
+	<td>Number of Logins</td>
+	<td>numberOfLogins</td>
+	<td>Label</td>
+</tr>
+<tr>
+	<td>Last Logged In</td>
+	<td>lastLoggedIn</td>
+	<td>Label</td>
+</tr>
+<tr>
+	<td>Reset GUID</td>
+	<td>resetGUID</td>
+	<td>Label</td>
+</tr>
+<tr>
+	<td>Has Verified Email</td>
+	<td>hasVerifiedEmail</td>
+	<td>True/False</td>
+</tr>
+<tr>
+	<td>Email Verify GUID</td>
+	<td>emailVerifyGUID</td>
+	<td>True/False</td>
+</tr>
+</table>
