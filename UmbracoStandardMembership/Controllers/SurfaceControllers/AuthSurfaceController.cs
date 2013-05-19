@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Umbraco.Web.Mvc;
-using UmbracoStandardMembership.Models;
-using UmbracoStandardMembership.Code;
+using CWSUmbracoStandardMembership.Models;
+using CWSUmbracoStandardMembership.Code;
+using umbraco.BusinessLogic;
 using umbraco.cms.businesslogic.member;
 
-namespace UmbracoStandardMembership.Controllers.SurfaceControllers
+namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
 {
     public class AuthSurfaceController : SurfaceController
     {
+
         /// <summary>
         /// Renders the Login view
         /// @Html.Action("RenderLogin","AuthSurface");
@@ -20,8 +23,21 @@ namespace UmbracoStandardMembership.Controllers.SurfaceControllers
         /// <returns></returns>
         public ActionResult RenderLogin()
         {
-            var viewModel = new AuthModel.LoginViewModel { ReturnUrl = HttpContext.Request["ReturnUrl"] };
-            return PartialView("Login", viewModel);
+            LoginViewModel loginModel = new LoginViewModel();
+
+
+            if (string.IsNullOrEmpty(HttpContext.Request["ReturnUrl"]))
+            {
+                //If returnURL is empty then set it to /
+                loginModel.ReturnUrl = "/";
+            }
+            else
+            {
+                //Lets use the return URL in the querystring or form post
+                loginModel.ReturnUrl = HttpContext.Request["ReturnUrl"];
+            }
+
+            return PartialView("Login", loginModel);
         }
 
 
@@ -31,10 +47,11 @@ namespace UmbracoStandardMembership.Controllers.SurfaceControllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult HandleLogin(AuthModel.LoginViewModel model)
+        public ActionResult HandleLogin(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
+                //return RedirectToCurrentUmbracoPage();
                 return PartialView("Login", model);
             }
 
@@ -50,11 +67,55 @@ namespace UmbracoStandardMembership.Controllers.SurfaceControllers
                 //Try and login the user...
                 if (Membership.ValidateUser(model.EmailAddress, model.Password))
                 {
-                    //Set Auth cookie
-                    FormsAuthentication.SetAuthCookie(model.EmailAddress, true);
+                    //Valid credentials
 
-                    //Once logged in - redirect them back to the return URL
-                    return new RedirectResult(model.ReturnUrl);
+                    //Get the member from their email address
+                    var checkMember = Member.GetMemberFromEmail(model.EmailAddress);
+
+                    //Check the member exists
+                    if (checkMember != null)
+                    {
+                        //Let's check they have verified their email address
+                        if (Convert.ToBoolean(checkMember.getProperty("hasVerifiedEmail").Value))
+                        {
+                            //Update number of logins counter
+                            int noLogins = 0;
+                            if (int.TryParse(checkMember.getProperty("numberOfLogins").Value.ToString(), out noLogins))
+                            {
+                                //Managed to parse it to a number
+                                //Don't need to do anything as we have default value of 0
+                            }
+
+                            //Update the counter
+                            checkMember.getProperty("numberOfLogins").Value = noLogins + 1;
+
+                            //Update label with last login date to now
+                            checkMember.getProperty("lastLoggedIn").Value = DateTime.Now.ToString("dd/MM/yyyy @ HH:mm:ss");
+
+                            //Update label with last logged in IP address & Host Name
+                            string hostName         = Dns.GetHostName();
+                            string clientIPAddress  = Dns.GetHostAddresses(hostName).GetValue(0).ToString();
+
+                            checkMember.getProperty("hostNameOfLastLogin").Value    = hostName;
+                            checkMember.getProperty("IPofLastLogin").Value          = clientIPAddress;
+
+                            //Save the details
+                            checkMember.Save();
+
+                            //If they have verified then lets log them in
+                            //Set Auth cookie
+                            FormsAuthentication.SetAuthCookie(model.EmailAddress, true);
+
+                            //Once logged in - redirect them back to the return URL
+                            return new RedirectResult(model.ReturnUrl);
+                        }
+                        else
+                        {
+                            //User has not verified their email yet
+                            ModelState.AddModelError("LoginForm.", "Email account has not been verified");
+                            return PartialView("Login", model);
+                        }
+                    }
                 }
                 else
                 {
@@ -67,6 +128,8 @@ namespace UmbracoStandardMembership.Controllers.SurfaceControllers
                 ModelState.AddModelError("LoginForm.", "Error: " + ex.ToString());
                 return PartialView("Login", model);
             }
+
+            return PartialView("Login", model);
         }
 
         //Used with an ActionLink
@@ -97,11 +160,11 @@ namespace UmbracoStandardMembership.Controllers.SurfaceControllers
         /// <returns></returns>
         public ActionResult RenderForgottenPassword()
         {
-            return PartialView("ForgottenPassword", new AuthModel.ForgottenPasswordViewModel());
+            return PartialView("ForgottenPassword", new ForgottenPasswordViewModel());
         }
 
         [HttpPost]
-        public ActionResult HandleForgottenPassword(AuthModel.ForgottenPasswordViewModel model)
+        public ActionResult HandleForgottenPassword(ForgottenPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -139,17 +202,17 @@ namespace UmbracoStandardMembership.Controllers.SurfaceControllers
 
 
         /// <summary>
-        /// Renders the Reset Password view
+        /// Renders the Reset Password View
         /// @Html.Action("RenderResetPassword","AuthSurface");
         /// </summary>
         /// <returns></returns>
         public ActionResult RenderResetPassword()
         {
-            return PartialView("ResetPassword", new AuthModel.ResetPasswordViewModel());
+            return PartialView("ResetPassword", new ResetPasswordViewModel());
         }
 
         [HttpPost]
-        public ActionResult HandleResetPassword(AuthModel.ResetPasswordViewModel model)
+        public ActionResult HandleResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -181,8 +244,9 @@ namespace UmbracoStandardMembership.Controllers.SurfaceControllers
                         //Check if date has NOT expired (been and gone)
                         if (currentTime.CompareTo(expiryTime) < 0)
                         {
+
                             //Got a match, we can allow user to update password
-                            resetMember.ChangePassword(model.Password);
+                            resetMember.Password = model.Password;
 
                             //Remove the resetGUID value
                             resetMember.getProperty("resetGUID").Value = string.Empty;
@@ -217,6 +281,129 @@ namespace UmbracoStandardMembership.Controllers.SurfaceControllers
             }
 
             return PartialView("ResetPassword", model);
+        }
+
+
+        /// <summary>
+        /// Renders the Register View
+        /// @Html.Action("RenderRegister","AuthSurface");
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RenderRegister()
+        {
+            return PartialView("Register", new RegisterViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult HandleRegister(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView("Register", model);
+            }
+
+            //Member Type
+            MemberType umbJobMemberType = MemberType.GetByAlias("Member");
+
+            //Umbraco Admin User (The Umbraco back office username who will create the member via the API)
+            User umbUser = new User("Admin");
+
+            //Model valid let's create the member
+            try
+            {
+                Member createMember = Member.MakeNew(model.Name, model.EmailAddress, model.EmailAddress, umbJobMemberType, umbUser);
+
+                //Set password on the newly created member
+                createMember.Password = model.Password;
+
+                //Set the verified email to false
+                createMember.getProperty("hasVerifiedEmail").Value = false;
+
+                //Save the changes
+                createMember.Save();
+            }
+            catch (Exception ex)
+            {
+                //EG: Duplicate email address - already exists
+                throw;
+            }
+
+
+            //Create temporary GUID
+            var tempGUID = Guid.NewGuid();
+
+            //Fetch our new member we created by their email
+            var updateMember = Member.GetMemberFromEmail(model.EmailAddress);
+
+            //Just to be sure...
+            if (updateMember != null)
+            {
+                //Set the verification email GUID value on the member
+                updateMember.getProperty("emailVerifyGUID").Value = tempGUID.ToString();
+
+                //Set the Joined Date label on the member
+                updateMember.getProperty("joinedDate").Value = DateTime.Now.ToString("dd/MM/yyyy @ HH:mm:ss");
+                
+                //Save changes
+                updateMember.Save();
+            }
+
+            //Send out verification email, with GUID in it
+            EmailHelper email = new EmailHelper();
+            email.SendVerifyEmail(model.EmailAddress, tempGUID.ToString());
+
+            //Return the view...
+            return PartialView("Register", new RegisterViewModel());
+
+        }
+
+        /// <summary>
+        /// Renders the Verify Email
+        /// @Html.Action("RenderVerifyEmail","AuthSurface");
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RenderVerifyEmail(string verifyGUID)
+        {
+            //Auto binds and gets guid from the querystring
+            Member findMember = Member.GetAllAsList().SingleOrDefault(x => x.getProperty("emailVerifyGUID").Value.ToString() == verifyGUID);
+
+            //Ensure we find a member with the verifyGUID
+            if (findMember != null)
+            {
+                //We got the member, so let's update the verify email checkbox
+                findMember.getProperty("hasVerifiedEmail").Value = true;
+
+                //Save the member
+                findMember.Save();
+            }
+            else
+            {
+                //Couldn't find them - most likely invalid GUID
+                return Redirect("/");
+            }
+
+            //Just in case...
+            return Redirect("/");
+        }
+
+
+        //REMOTE Validation
+        /// <summary>
+        /// Used with jQuery Validate to check when user registers that email address not already used
+        /// </summary>
+        /// <param name="emailAddress"></param>
+        /// <returns></returns>
+        public JsonResult CheckEmailIsUsed(string emailAddress)
+        {
+            //Try and get member by email typed in
+            var checkEmail = Member.GetMemberFromEmail(emailAddress);
+
+            if (checkEmail != null)
+            {
+                return Json(String.Format("The email address '{0}' is already in use.", emailAddress), JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
     }
 }

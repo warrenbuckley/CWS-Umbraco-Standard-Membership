@@ -2,8 +2,12 @@
 @using Umbraco.Web
 @using $rootnamespace$.Models
 @using $rootnamespace$.Controllers.SurfaceControllers
-@model AuthModel.ForgottenPasswordViewModel
+@model ForgottenPasswordViewModel
 
+@{
+    Html.EnableClientValidation(true);
+    Html.EnableUnobtrusiveJavaScript(true);
+}
 
 @using(Html.BeginUmbracoForm<AuthSurfaceController>("HandleForgottenPassword") )
 {

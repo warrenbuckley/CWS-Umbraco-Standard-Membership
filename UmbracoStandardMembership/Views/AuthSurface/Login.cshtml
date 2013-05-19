@@ -1,9 +1,14 @@
 ﻿@using System.Web.Mvc
 @using System.Web.Mvc.Html
 @using Umbraco.Web
-@using UmbracoStandardMembership.Controllers.SurfaceControllers
-@using UmbracoStandardMembership.Models
-@model AuthModel.LoginViewModel
+@using CWSUmbracoStandardMembership.Controllers.SurfaceControllers
+@using CWSUmbracoStandardMembership.Models
+@model LoginViewModel
+
+@{
+    Html.EnableClientValidation(true);
+    Html.EnableUnobtrusiveJavaScript(true);
+}
 
 @if (!ViewData.ModelState.IsValid)
 {
@@ -33,7 +38,7 @@
 }
 
 
-@using(Html.BeginUmbracoForm<AuthSurfaceController>("HandleLogin") )
+@using(Html.BeginUmbracoForm<AuthSurfaceController>("HandleLogin"))
 {
     @Html.ValidationSummary(true)
 

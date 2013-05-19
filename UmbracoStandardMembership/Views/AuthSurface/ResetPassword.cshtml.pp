@@ -3,7 +3,12 @@
 @using Umbraco.Web
 @using $rootnamespace$.Models
 @using $rootnamespace$.Controllers.SurfaceControllers
-@model AuthModel.ResetPasswordViewModel
+@model ResetPasswordViewModel
+
+@{
+    Html.EnableClientValidation(true);
+    Html.EnableUnobtrusiveJavaScript(true);
+}
 
 @if (!ViewData.ModelState.IsValid)
 {

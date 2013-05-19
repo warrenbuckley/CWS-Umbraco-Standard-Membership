@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UmbracoStandardMembership", "UmbracoStandardMembership.csproj", "{8462EFA8-0B93-4518-BDA3-1934BAFEB437}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWSUmbracoStandardMembership", "CWSUmbracoStandardMembership.csproj", "{8462EFA8-0B93-4518-BDA3-1934BAFEB437}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0F79BF0B-F81C-4545-858C-7EAD50357964}"
 	ProjectSection(SolutionItems) = preProject

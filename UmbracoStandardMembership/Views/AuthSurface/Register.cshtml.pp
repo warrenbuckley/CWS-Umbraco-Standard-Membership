@@ -1,52 +1,33 @@
-﻿@using System.Web.Mvc
 @using System.Web.Mvc.Html
 @using Umbraco.Web
 @using $rootnamespace$.Controllers.SurfaceControllers
 @using $rootnamespace$.Models
-@model LoginViewModel
+@using umbraco.cms.businesslogic.member
+@model RegisterViewModel
 
 @{
     Html.EnableClientValidation(true);
     Html.EnableUnobtrusiveJavaScript(true);
 }
 
-@if (!ViewData.ModelState.IsValid)
-{
-
-    <h3>Forgotten your password?</h3>
-    <p>
-        Don't worry we all forget our passwords from time to time
-    </p>
-    
-    foreach (ModelState modelState in ViewData.ModelState.Values)
-    {
-        var errors = modelState.Errors;
-
-        if (errors.Any())
-        { 
-            <ul>
-                @foreach(ModelError error in errors)
-                {
-                    <li><em>@error.ErrorMessage</em></li>
-                }
-            </ul>
-        }
-    }
-    <p>
-        <a href="/forgotten-password">Remind me</a>
-    </p>
-}
-
-
-@using(Html.BeginUmbracoForm<AuthSurfaceController>("HandleLogin"))
+@using(Html.BeginUmbracoForm<AuthSurfaceController>("HandleRegister") )
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Login</legend>
+        <legend>Register</legend>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
 
         
-		<div class="editor-label">
+        <div class="editor-label">
             @Html.LabelFor(model => model.EmailAddress)
         </div>
 
@@ -64,8 +45,18 @@
             @Html.ValidationMessageFor(model => model.Password)
         </div>
         
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConfirmPassword)
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ConfirmPassword)
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+        </div>
+        
+
         <p>
-            <input type="submit" value="Login" />
+            <input type="submit" value="Register" />
         </p>
     </fieldset>
 }
