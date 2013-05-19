@@ -77,6 +77,6 @@ Your member type in the Umbraco backoffice will need the following properties ad
 <tr>
 	<td>Email Verify GUID</td>
 	<td>emailVerifyGUID</td>
-	<td>True/False</td>
+	<td>Label</td>
 </tr>
 </table>
