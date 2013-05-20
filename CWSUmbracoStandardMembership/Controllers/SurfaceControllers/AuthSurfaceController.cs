@@ -47,6 +47,7 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult HandleLogin(LoginViewModel model)
         {
             if (!ModelState.IsValid)
@@ -164,6 +165,7 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult HandleForgottenPassword(ForgottenPasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -212,6 +214,7 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult HandleResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -295,6 +298,7 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult HandleRegister(RegisterViewModel model)
         {
             if (!ModelState.IsValid)

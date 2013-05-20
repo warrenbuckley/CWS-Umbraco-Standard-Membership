@@ -12,6 +12,7 @@
 
 @using(Html.BeginUmbracoForm<AuthSurfaceController>("HandleRegister") )
 {
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>

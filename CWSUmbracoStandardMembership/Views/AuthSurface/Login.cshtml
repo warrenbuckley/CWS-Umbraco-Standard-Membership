@@ -12,7 +12,6 @@
 
 @if (!ViewData.ModelState.IsValid)
 {
-
     <h3>Forgotten your password?</h3>
     <p>
         Don't worry we all forget our passwords from time to time
@@ -40,6 +39,7 @@
 
 @using(Html.BeginUmbracoForm<AuthSurfaceController>("HandleLogin"))
 {
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>

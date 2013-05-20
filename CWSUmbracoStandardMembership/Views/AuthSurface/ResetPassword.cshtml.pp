@@ -32,6 +32,7 @@
 
 @using(Html.BeginUmbracoForm<AuthSurfaceController>("HandleResetPassword") )
 {
+	@Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
