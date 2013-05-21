@@ -79,4 +79,24 @@ Your member type in the Umbraco backoffice will need the following properties ad
 	<td>emailVerifyGUID</td>
 	<td>Label</td>
 </tr>
+<tr>
+	<td>Description</td>
+	<td>description</td>
+	<td>Textbox</td>
+</tr>
+<tr>
+	<td>Twitter</td>
+	<td>twitter</td>
+	<td>Textbox</td>
+</tr>
+<tr>
+	<td>LinkedIn</td>
+	<td>linkedIn</td>
+	<td>Textbox</td>
+</tr>
+<tr>
+	<td>Skype</td>
+	<td>skype</td>
+	<td>Textbox</td>
+</tr>
 </table>
