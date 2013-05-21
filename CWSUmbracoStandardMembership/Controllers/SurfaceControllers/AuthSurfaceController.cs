@@ -323,6 +323,9 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
                 //Set the verified email to false
                 createMember.getProperty("hasVerifiedEmail").Value = false;
 
+                //Set the profile URL to be the member ID, so they have a unqie profile ID, until they go to set it
+                createMember.getProperty("profileURL").Value = createMember.Id;
+
                 //Save the changes
                 createMember.Save();
             }

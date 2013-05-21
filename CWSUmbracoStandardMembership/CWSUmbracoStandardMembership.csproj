@@ -235,8 +235,12 @@
     <Compile Include="Code\EmailHelper.cs" />
     <Compile Include="Controllers\SurfaceControllers\AuthSurfaceController.cs" />
     <None Include="Controllers\SurfaceControllers\AuthSurfaceController.cs.pp" />
+    <None Include="Controllers\SurfaceControllers\ProfileSurfaceController.cs.pp" />
+    <Compile Include="Controllers\SurfaceControllers\ProfileSurfaceController.cs" />
     <Compile Include="Models\AuthModel.cs" />
     <None Include="Models\AuthModel.cs.pp" />
+    <None Include="Models\ProfileModel.cs.pp" />
+    <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Views\AuthSurface\Register.cshtml" />
     <None Include="Views\AuthSurface\Register.cshtml.pp" />
@@ -249,6 +253,8 @@
     <Content Include="Views\AuthSurface\Login.cshtml" />
     <Content Include="Views\AuthSurface\ForgottenPassword.cshtml" />
     <Content Include="Views\AuthSurface\ResetPassword.cshtml" />
+    <Content Include="Views\ProfileSurface\EditProfile.cshtml" />
+    <None Include="Views\ProfileSurface\EditProfile.cshtml.pp" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
