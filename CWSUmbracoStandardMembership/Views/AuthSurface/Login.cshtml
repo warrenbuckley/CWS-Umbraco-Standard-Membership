@@ -64,6 +64,8 @@
             @Html.ValidationMessageFor(model => model.Password)
         </div>
         
+        @Html.HiddenFor(Model => Model.ReturnUrl)
+
         <p>
             <input type="submit" value="Login" />
         </p>
