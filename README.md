@@ -99,4 +99,9 @@ Your member type in the Umbraco backoffice will need the following properties ad
 	<td>skype</td>
 	<td>Textbox</td>
 </tr>
+<tr>
+	<td>Profile URL</td>
+	<td>profileURL</td>
+	<td>Textbox</td>
+</tr>
 </table>
