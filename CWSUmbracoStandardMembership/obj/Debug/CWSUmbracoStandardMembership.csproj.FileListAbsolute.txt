@@ -77,8 +77,6 @@ C:\inetpub\wwwroot\Personal\umbraco-standard-membership\UmbracoStandardMembershi
 C:\inetpub\wwwroot\Personal\umbraco-standard-membership\UmbracoStandardMembership\obj\Debug\CWSUmbracoStandardMembership.csprojResolveAssemblyReference.cache
 C:\inetpub\wwwroot\Personal\umbraco-standard-membership\UmbracoStandardMembership\obj\Debug\UmbracoStandardMembership.dll
 C:\inetpub\wwwroot\Personal\umbraco-standard-membership\UmbracoStandardMembership\obj\Debug\UmbracoStandardMembership.pdb
-C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMembership\bin\UmbracoStandardMembership.dll
-C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMembership\bin\UmbracoStandardMembership.pdb
 C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMembership\bin\businesslogic.dll
 C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMembership\bin\ClientDependency.Core.dll
 C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMembership\bin\ClientDependency.Core.Mvc.dll
@@ -154,5 +152,7 @@ C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMember
 C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMembership\bin\umbraco.macroRenderings.xml
 C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMembership\bin\umbraco.providers.xml
 C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMembership\obj\Debug\CWSUmbracoStandardMembership.csprojResolveAssemblyReference.cache
-C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMembership\obj\Debug\UmbracoStandardMembership.dll
-C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMembership\obj\Debug\UmbracoStandardMembership.pdb
+C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMembership\bin\CWSUmbracoStandardMembership.dll
+C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMembership\bin\CWSUmbracoStandardMembership.pdb
+C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMembership\obj\Debug\CWSUmbracoStandardMembership.dll
+C:\inetpub\wwwroot\Personal\umbraco-standard-membership\CWSUmbracoStandardMembership\obj\Debug\CWSUmbracoStandardMembership.pdb

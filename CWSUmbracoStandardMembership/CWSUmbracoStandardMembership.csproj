@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UmbracoStandardMembership</RootNamespace>
-    <AssemblyName>UmbracoStandardMembership</AssemblyName>
+    <RootNamespace>CWSUmbracoStandardMembership</RootNamespace>
+    <AssemblyName>CWSUmbracoStandardMembership</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -233,6 +233,8 @@
   <ItemGroup>
     <None Include="Code\EmailHelper.cs.pp" />
     <Compile Include="Code\EmailHelper.cs" />
+    <Compile Include="Code\Helpers.cs" />
+    <Compile Include="Code\UmbracoStartup.cs" />
     <Compile Include="Controllers\SurfaceControllers\AuthSurfaceController.cs" />
     <None Include="Controllers\SurfaceControllers\AuthSurfaceController.cs.pp" />
     <None Include="Controllers\SurfaceControllers\ProfileSurfaceController.cs.pp" />
@@ -241,6 +243,7 @@
     <None Include="Models\AuthModel.cs.pp" />
     <None Include="Models\ProfileModel.cs.pp" />
     <Compile Include="Models\ProfileModel.cs" />
+    <Compile Include="Models\ViewProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Views\AuthSurface\Register.cshtml" />
     <None Include="Views\AuthSurface\Register.cshtml.pp" />
@@ -254,6 +257,7 @@
     <Content Include="Views\AuthSurface\ForgottenPassword.cshtml" />
     <Content Include="Views\AuthSurface\ResetPassword.cshtml" />
     <Content Include="Views\ProfileSurface\EditProfile.cshtml" />
+    <Content Include="Views\ProfileSurface\ViewProfile.cshtml" />
     <None Include="Views\ProfileSurface\EditProfile.cshtml.pp" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -276,7 +280,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>56843</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:61143/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
