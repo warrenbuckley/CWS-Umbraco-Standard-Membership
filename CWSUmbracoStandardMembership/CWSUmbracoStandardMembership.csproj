@@ -232,6 +232,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Code\EmailHelper.cs.pp" />
+    <None Include="Code\Helpers.cs.pp" />
+    <None Include="Code\UmbracoStartup.cs.pp" />
     <Compile Include="Code\EmailHelper.cs" />
     <Compile Include="Code\Helpers.cs" />
     <Compile Include="Code\UmbracoStartup.cs" />
@@ -242,6 +244,7 @@
     <Compile Include="Models\AuthModel.cs" />
     <None Include="Models\AuthModel.cs.pp" />
     <None Include="Models\ProfileModel.cs.pp" />
+    <None Include="Models\ViewProfileViewModel.cs.pp" />
     <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Models\ViewProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -258,6 +261,7 @@
     <Content Include="Views\AuthSurface\ResetPassword.cshtml" />
     <Content Include="Views\ProfileSurface\EditProfile.cshtml" />
     <Content Include="Views\ProfileSurface\ViewProfile.cshtml" />
+    <None Include="Views\ProfileSurface\ViewProfile.cshtml.pp" />
     <None Include="Views\ProfileSurface\EditProfile.cshtml.pp" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
