@@ -98,7 +98,7 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
                             string clientIPAddress  = Dns.GetHostAddresses(hostName).GetValue(0).ToString();
 
                             checkMember.getProperty("hostNameOfLastLogin").Value    = hostName;
-                            checkMember.getProperty("IPofLastLogin").Value          = clientIPAddress;
+                            checkMember.getProperty("iPOfLastLogin").Value          = clientIPAddress;
 
                             //Save the details
                             checkMember.Save();
@@ -108,7 +108,14 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
                             FormsAuthentication.SetAuthCookie(model.EmailAddress, true);
 
                             //Once logged in - redirect them back to the return URL
-                            return new RedirectResult(model.ReturnUrl);
+                            if (!string.IsNullOrEmpty(model.ReturnUrl))
+                            {
+                                return new RedirectResult(model.ReturnUrl);
+                            }
+                            else
+                            {
+                                return new RedirectResult("/");
+                            }
                         }
                         else
                         {
