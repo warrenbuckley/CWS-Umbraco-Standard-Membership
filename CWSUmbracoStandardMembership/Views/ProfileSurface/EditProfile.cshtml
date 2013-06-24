@@ -12,10 +12,7 @@
 @using(Html.BeginUmbracoForm<ProfileSurfaceController>("HandleEditProfile"))
 {
     @Html.ValidationSummary(true)
-    @Html.HiddenFor(model => model.MemberID)
-@Html.HiddenFor(model => model.ProfileURL)
-@Html.HiddenFor(model => model.EmailAddress)
-@Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
     <fieldset>
         <legend>Edit Profile</legend>
