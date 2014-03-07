@@ -98,7 +98,7 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
                             string clientIPAddress  = Dns.GetHostAddresses(hostName).GetValue(0).ToString();
 
                             checkMember.getProperty("hostNameOfLastLogin").Value    = hostName;
-                            checkMember.getProperty("IPofLastLogin").Value          = clientIPAddress;
+                            checkMember.getProperty("iPofLastLogin").Value          = clientIPAddress;
 
                             //Save the details
                             checkMember.Save();
