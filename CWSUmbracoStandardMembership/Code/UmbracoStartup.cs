@@ -6,7 +6,7 @@ namespace CWSUmbracoStandardMembership.Code
 {
     public class UmbracoStartup : ApplicationEventHandler
     {
-        protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+        protected override void ApplicationStarting(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
             //Register custom MVC route for user profile
             RegisterRoutes(RouteTable.Routes);
@@ -15,9 +15,9 @@ namespace CWSUmbracoStandardMembership.Code
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.MapRoute(
-                "MemberProfile",                                                        // Route name
+                "ProfilePage",                                                          // Route name
                 "user/{profileURLtoCheck}",                                             // URL with parameters
-                new { controller = "ProfileSurface", action = "RenderMemberProfile" }   // Parameter defaults
+                new { controller = "MemberProfile", action = "RenderMemberProfile" }    // Parameter defaults
             );
         }
     }

@@ -7,42 +7,33 @@ using Umbraco.Web;
 
 namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
 {
-    public class ProfileSurfaceController : SurfaceController
+    [Authorize]
+    public class MemberEditController : SurfaceController
     {
         /// <summary>
         /// Gets the logged in user, populates the model and returns it
         /// </summary>
         /// <returns></returns>
-        [Authorize]
+        [ChildActionOnly]
         public ActionResult RenderEditProfile()
         {
+            // Get the current member
             var membershipHelper = new Umbraco.Web.Security.MembershipHelper(UmbracoContext.Current);
+            var currentMember = membershipHelper.GetCurrentMember();
 
-            //If user is logged in then let's create the model
-            if (User?.Identity.IsAuthenticated == true)
-            {
-                ProfileViewModel profileModel = new ProfileViewModel();
+            ProfileViewModel profileModel = new ProfileViewModel();
 
-                //Let's fill it up
-                var currentMember = membershipHelper.GetCurrentMember();
-
-                profileModel.Name           = currentMember.Name;
-                profileModel.EmailAddress   = currentMember.GetPropertyValue<string>("Email");
-                profileModel.MemberID       = currentMember.Id;
-                profileModel.Description    = currentMember.GetPropertyValue<string>("description");
-                profileModel.ProfileURL     = currentMember.GetPropertyValue<string>("profileURL");
-                profileModel.Twitter        = currentMember.GetPropertyValue<string>("twitter");
-                profileModel.LinkedIn       = currentMember.GetPropertyValue<string>("linkedIn");
-                profileModel.Skype          = currentMember.GetPropertyValue<string>("skype");
+            profileModel.Name           = currentMember.Name;
+            profileModel.EmailAddress   = currentMember.GetPropertyValue<string>("Email");
+            profileModel.MemberID       = currentMember.Id;
+            profileModel.Description    = currentMember.GetPropertyValue<string>("description");
+            profileModel.ProfileURL     = currentMember.GetPropertyValue<string>("profileURL");
+            profileModel.Twitter        = currentMember.GetPropertyValue<string>("twitter");
+            profileModel.LinkedIn       = currentMember.GetPropertyValue<string>("linkedIn");
+            profileModel.Skype          = currentMember.GetPropertyValue<string>("skype");
                 
-                //Pass the model to the view
-                return PartialView("EditProfile", profileModel);
-            }
-            else
-            {
-                //They are not logged in, redirect to home
-                return Redirect("/");
-            }
+            //Pass the model to the view
+            return PartialView("EditProfile", profileModel);
         }
 
         /// <summary>
@@ -50,7 +41,8 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult HandleEditProfile(ProfileViewModel model)
         {
             if (!ModelState.IsValid) return PartialView("EditProfile", model);
@@ -72,47 +64,42 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
             return PartialView("EditProfile", model);
         }
 
-        public ActionResult RenderMemberProfile(string profileURLtoCheck)
+        /// <summary>
+        /// Renders the Change Password View
+        /// @Html.Action("RenderChangePassword","MemberProfile");
+        /// </summary>
+        /// <returns></returns>
+        [ChildActionOnly]
+        public ActionResult RenderChangePassword()
         {
-            //Try and find member with the QueryString value ?profileURLtoCheck=warrenbuckley
-            var findMember = Services.MemberService.GetMembersByPropertyValue("profileURL", profileURLtoCheck).FirstOrDefault();
+            return PartialView("ChangePassword", new ChangePasswordViewModel());
+        }
 
-            //Check if we found member
-            if (findMember != null)
-            {
-                //Create a view model
-                ViewProfileViewModel profile = new ViewProfileViewModel();
+        /// <summary>
+        /// Update the logged in members password
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult HandleChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid) return PartialView("ChangePassword", model);
 
-                //Increment profile view counter by one
-                int noOfProfileViews = findMember.GetValue<int>("numberOfProfileViews");
-                findMember.SetValue("numberOfProfileViews", noOfProfileViews + 1);
+            var membershipHelper = new Umbraco.Web.Security.MembershipHelper(UmbracoContext.Current);
 
-                //Save it down to the member
-                Services.MemberService.Save(findMember);
+            // Get the current member
+            var member = Services.MemberService.GetById(membershipHelper.GetCurrentMemberId());
 
-                //Got the member lets bind the data to the view model
-                profile.Name                    = findMember.Name;
-                profile.MemberID                = findMember.Id;
-                profile.EmailAddress            = findMember.Email;
-                profile.MemberType              = string.Join(",", System.Web.Security.Roles.GetRolesForUser(findMember.Username));
+            //TODO-1: Validate their current password
 
-                profile.Description             = findMember.GetValue<string>("description");
+            //Save the password for the member
+            Services.MemberService.SavePassword(member, model.Password);
 
-                profile.LinkedIn                = findMember.GetValue<string>("linkedIn");
-                profile.Skype                   = findMember.GetValue<string>("skype");
-                profile.Twitter                 = findMember.GetValue<string>("twitter");
+            //TODO-2: Notify the member that their password was just changed
 
-                profile.NumberOfLogins          = findMember.GetValue<int>("numberOfLogins");
-                profile.LastLoginDate           = DateTime.ParseExact(findMember.GetValue<string>("lastLoggedIn"), "dd/MM/yyyy @ HH:mm:ss", null);
-                profile.NumberOfProfileViews    = findMember.GetValue<int>("numberOfProfileViews");
-                
-                return PartialView("ViewProfile", profile);
-            }
-            else
-            {
-                //Couldn't find the member return a 404
-                return new HttpNotFoundResult("The member profile does not exist");
-            }
+            //Return the view
+            return PartialView("ChangePassword", model);
         }
 
         #region REMOTE Validation

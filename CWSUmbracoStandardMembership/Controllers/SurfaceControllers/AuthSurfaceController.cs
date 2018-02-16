@@ -19,6 +19,7 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
         /// @Html.Action("RenderLogin","AuthSurface");
         /// </summary>
         /// <returns></returns>
+        [ChildActionOnly]
         public ActionResult RenderLogin()
         {
             LoginViewModel loginModel = new LoginViewModel();
@@ -147,6 +148,7 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
         /// @Html.Action("RenderForgottenPassword","AuthSurface");
         /// </summary>
         /// <returns></returns>
+        [ChildActionOnly]
         public ActionResult RenderForgottenPassword()
         {
             return PartialView("ForgottenPassword", new ForgottenPasswordViewModel());
@@ -190,6 +192,7 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
         /// @Html.Action("RenderResetPassword","AuthSurface");
         /// </summary>
         /// <returns></returns>
+        [ChildActionOnly]
         public ActionResult RenderResetPassword()
         {
             return PartialView("ResetPassword", new ResetPasswordViewModel());
@@ -270,6 +273,7 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
         /// @Html.Action("RenderRegister","AuthSurface");
         /// </summary>
         /// <returns></returns>
+        [ChildActionOnly]
         public ActionResult RenderRegister()
         {
             return PartialView("Register", new RegisterViewModel());
@@ -300,19 +304,17 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
             }
             catch (Exception ex)
             {
-                //TODO-1: Duplicate email address - already exists
+                //TODO-1: Handle any errors here and inform the member
+                //TODO-2: Duplicate email address - already exists
                 throw;
             }
 
-            //=============== TODO: Refactor the code below =================\\
-
+            //If nothing failed while saving the member, we continue the onboarding:
             //Create temporary GUID
             var tempGUID = Guid.NewGuid();
 
             //Fetch our new member we created by their email
             var updateMember = ms.GetByEmail(model.EmailAddress);
-
-            //Just to be sure...
             if (updateMember != null)
             {
                 //Set the verification email GUID value on the member
@@ -329,9 +331,9 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
             EmailHelper email = new EmailHelper();
             await email.SendVerifyEmail(model.EmailAddress, tempGUID.ToString());
 
+            //TODO: Return a success message and perhaps redirect the user instead.
             //Return the view...
             return PartialView("Register", new RegisterViewModel());
-
         }
 
         /// <summary>
@@ -339,6 +341,7 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
         /// @Html.Action("RenderVerifyEmail","AuthSurface");
         /// </summary>
         /// <returns></returns>
+        [ChildActionOnly]
         public ActionResult RenderVerifyEmail(string verifyGUID)
         {
             //Auto binds and gets guid from the querystring
