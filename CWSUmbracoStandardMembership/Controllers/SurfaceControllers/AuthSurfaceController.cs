@@ -154,6 +154,11 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
             return PartialView("ForgottenPassword", new ForgottenPasswordViewModel());
         }
 
+        /// <summary>
+        /// Creates a new resetGUID for the member and sends them an email with a password-reset link, with a 15 minute expiration time.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> HandleForgottenPassword(ForgottenPasswordViewModel model)

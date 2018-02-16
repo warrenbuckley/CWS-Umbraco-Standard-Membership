@@ -177,7 +177,7 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
                 if (member.GetPropertyValue<string>("profileURL") == profileURL) return Json(true, JsonRequestBehavior.AllowGet);
 
                 //Check if an exisiting member is already using this Url:  
-                //TODO-1: Maybe just don't search for current user below and skip the line above?
+                //TODO-1: Maybe just exclude the current user in below search and delete the line above?
                 var checkProfileURL = Services.MemberService.GetMembersByPropertyValue("profileUrl", profileURL).FirstOrDefault(); 
 
                 //If an exisiting member was found, then return negative
