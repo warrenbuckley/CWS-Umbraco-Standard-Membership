@@ -60,6 +60,11 @@ Your member type in the Umbraco backoffice will need the following properties ad
 	<td>Label</td>
 </tr>
 <tr>
+	<td>Number of Profile Views</td>
+	<td>numberOfProfileViews</td>
+	<td>Label</td>
+</tr>
+<tr>
 	<td>Last Logged In</td>
 	<td>lastLoggedIn</td>
 	<td>Label</td>
