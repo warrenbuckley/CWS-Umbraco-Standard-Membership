@@ -10,7 +10,7 @@ namespace CWSUmbracoStandardMembership.Models
     /// </summary>
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Please enter yourname")]
+        [Required(ErrorMessage = "Please enter your name")]
         public string Name { get; set; }
 
         [DisplayName("Email address")]
@@ -21,12 +21,13 @@ namespace CWSUmbracoStandardMembership.Models
 
         [UIHint("Password")]
         [Required(ErrorMessage = "Please enter your password")]
+        [MinLength(10, ErrorMessage = "Password must be at least 10 characters long")]
         public string Password { get; set; }
 
         [UIHint("Password")]
         [DisplayName("Confirm Password")]
         [Required(ErrorMessage = "Please enter your password")]
-        [EqualTo("Password", ErrorMessage = "Youyr passwords do not match")]
+        [EqualTo("Password", ErrorMessage = "Your passwords do not match")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -42,6 +43,7 @@ namespace CWSUmbracoStandardMembership.Models
 
         [UIHint("Password")]
         [Required(ErrorMessage = "Please enter your password")]
+        [MinLength(10, ErrorMessage = "Password must be at least 10 characters long")]
         public string Password { get; set; }
 
         [HiddenInput(DisplayValue = false)]
@@ -68,12 +70,13 @@ namespace CWSUmbracoStandardMembership.Models
 
         [UIHint("Password")]
         [Required(ErrorMessage = "Please enter your password")]
+        [MinLength(10, ErrorMessage = "Password must be at least 10 characters long")]
         public string Password { get; set; }
 
         [UIHint("Password")]
         [DisplayName("Confirm Password")]
         [Required(ErrorMessage = "Please enter your password")]
-        [EqualTo("Password", ErrorMessage = "Youyr passwords do not match")]
+        [EqualTo("Password", ErrorMessage = "Your passwords do not match")]
         public string ConfirmPassword { get; set; }
     }
 }
