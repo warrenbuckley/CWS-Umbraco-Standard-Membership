@@ -29,6 +29,10 @@ namespace CWSUmbracoStandardMembership.Models
         [Required(ErrorMessage = "Please enter your password")]
         [EqualTo("Password", ErrorMessage = "Your passwords do not match")]
         public string ConfirmPassword { get; set; }
+
+        [DisplayName("I accept the Terms and Conditions")]
+        [Range(typeof(bool), "true", "true", ErrorMessage = "Please accept the terms in order to register")]
+        public bool TermsAndConditions { get; set; }
     }
 
     /// <summary>
