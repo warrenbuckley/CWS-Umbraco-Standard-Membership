@@ -318,6 +318,8 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\MemberEdit\DeleteProfile.cshtml" />
+    <None Include="Views\MemberEdit\DeleteProfile.cshtml.pp" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using CWSUmbracoStandardMembership.Models;
 using Umbraco.Web.Mvc;
 using Umbraco.Web;
+using System.Web.Security;
 
 namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
 {
@@ -100,6 +101,43 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
 
             //Return the view
             return PartialView("ChangePassword", model);
+        }
+
+        public ActionResult RenderDeleteProfile()
+        {
+            return PartialView("DeleteProfile");
+        }
+
+        /// <summary>
+        /// Deletes a member and all their associated data
+        /// @Html.ActionLink("Delete Profile", "HandleDeleteProfile", "MemberEdit")
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult HandleDeleteProfile()
+        {
+            try
+            {
+                // Get the current member
+                var membershipHelper = new Umbraco.Web.Security.MembershipHelper(UmbracoContext.Current);
+                var member = Services.MemberService.GetById(membershipHelper.GetCurrentMemberId());
+
+                //TODO-OPTIONAL:    Notify the member that their profile is being deleted in x days, giving them a couple of days to cancel this. 
+                //                  -> Then delete the member with a scheduled task automatically after that period of time.
+
+                // Delete the member
+                Services.MemberService.Delete(member);
+            }
+            catch (Exception ex)
+            {
+                //TODO-1: Log the exception
+                throw;
+            }
+
+            // Log the member out
+            FormsAuthentication.SignOut();
+
+            // Redirect home or to a custom page
+            return Redirect("/");
         }
 
         #region REMOTE Validation
