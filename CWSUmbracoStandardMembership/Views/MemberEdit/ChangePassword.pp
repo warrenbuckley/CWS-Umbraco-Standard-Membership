@@ -1,5 +1,5 @@
-@using $rootnamespace$.Models
 @using $rootnamespace$.Controllers.SurfaceControllers
+@using $rootnamespace$.Models
 @model ChangePasswordViewModel
 @{
     Html.EnableClientValidation(true);

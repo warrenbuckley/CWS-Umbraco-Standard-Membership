@@ -1,9 +1,6 @@
 @using $rootnamespace$.Code
-@using $rootnamespace$.Controllers.SurfaceControllers
 @using $rootnamespace$.Models
-@using UmbracoStandardMembership.Code
 @model ViewProfileViewModel
-
 
 <h3>View Profile</h3>
 

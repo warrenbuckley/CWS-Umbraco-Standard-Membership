@@ -288,13 +288,15 @@
     <Compile Include="Code\UmbracoStartup.cs" />
     <Compile Include="Controllers\SurfaceControllers\AuthSurfaceController.cs" />
     <None Include="Controllers\SurfaceControllers\AuthSurfaceController.cs.pp" />
-    <None Include="Controllers\SurfaceControllers\MemberProfileSurfaceController.pp" />
+    <None Include="Controllers\SurfaceControllers\MemberProfileSurfaceController.cs.pp" />
+    <None Include="Controllers\SurfaceControllers\MemberEditController.cs.pp" />
     <Compile Include="Controllers\SurfaceControllers\MemberEditController.cs" />
     <Compile Include="Controllers\SurfaceControllers\MemberProfileController.cs" />
     <Compile Include="Models\AuthModel.cs" />
     <None Include="Models\AuthModel.cs.pp" />
     <None Include="Models\ProfileModel.cs.pp" />
     <None Include="Models\ViewProfileViewModel.cs.pp" />
+    <None Include="Models\ChangePasswordViewModel.cs.pp" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Models\ViewProfileViewModel.cs" />

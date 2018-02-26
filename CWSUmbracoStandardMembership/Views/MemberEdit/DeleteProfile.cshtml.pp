@@ -1,5 +1,5 @@
-@using CWSUmbracoStandardMembership.Controllers.SurfaceControllers
-@using CWSUmbracoStandardMembership.Models
+@using $rootnamespace$.Controllers.SurfaceControllers
+@using $rootnamespace$.Models
 
 <h3>Delete profile</h3>
 <p>The deletion of your profile and data is described in our <a href="#">terms of service</a>.</p>
