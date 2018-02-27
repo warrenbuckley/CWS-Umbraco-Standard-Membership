@@ -40,14 +40,16 @@ If you wish to use the ChangePassword functionality, you need to set the **allow
     <add name="UmbracoMembershipProvider" type="Umbraco.Web.Security.Providers.MembersMembershipProvider, Umbraco" minRequiredNonalphanumericCharacters="0" minRequiredPasswordLength="10" useLegacyEncoding="false" enablePasswordRetrieval="false" enablePasswordReset="false" requiresQuestionAndAnswer="false" defaultMemberTypeAlias="Member" passwordFormat="Hashed" allowManuallyChangingPassword="true" />
 
 ## Umbraco Member Setup
-In order to use the code properly, your member type in Umbraco will need to support the new properties. The code includes a **MemberConfigController** that can automagically set up the required properties for you. 
+In order to use the code properly, your member type in Umbraco will need to support the new properties.
 
-**Include this in a view, click the action, and verify that the properties were added to the member type:**
+### Automagic setup
+The code includes a **MemberConfigController** that can automagically set up the required properties for you. Include this in a view, click the action, and verify that the properties were added to the member type
 
     @Html.ActionLink("Configure member properties", "ConfigureMemberProperties", "MemberConfig", new { memberTypeAlias = "Member" }, null)
 You can change the **memberTypeAlias** if you wish to configure another, or extend the method directly from the Controller.
 
-**Manual setup:**
+### Manual setup
+
 If you want to add the properties manually from the Umbraco backoffice, here are the required ones:
 
 <table>
