@@ -290,6 +290,8 @@
     <None Include="Controllers\SurfaceControllers\AuthSurfaceController.cs.pp" />
     <None Include="Controllers\SurfaceControllers\MemberProfileSurfaceController.cs.pp" />
     <None Include="Controllers\SurfaceControllers\MemberEditController.cs.pp" />
+    <None Include="Controllers\SurfaceControllers\MemberConfigController.cs.pp" />
+    <Compile Include="Controllers\SurfaceControllers\MemberConfigController.cs" />
     <Compile Include="Controllers\SurfaceControllers\MemberEditController.cs" />
     <Compile Include="Controllers\SurfaceControllers\MemberProfileController.cs" />
     <Compile Include="Models\AuthModel.cs" />

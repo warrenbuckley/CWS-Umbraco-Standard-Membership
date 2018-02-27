@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using CWSUmbracoStandardMembership.Models;
+using $rootnamespace$.Models;
 using Umbraco.Web.Mvc;
 using Umbraco.Web;
 using System.Web.Security;
 
-namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
+namespace $rootnamespace$.Controllers.SurfaceControllers
 {
     [Authorize]
     public class MemberEditController : SurfaceController
