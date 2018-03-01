@@ -346,7 +346,6 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
         /// @Html.Action("RenderVerifyEmail","AuthSurface");
         /// </summary>
         /// <returns></returns>
-        [ChildActionOnly]
         public ActionResult RenderVerifyEmail(string verifyGUID)
         {
             //Auto binds and gets guid from the querystring
