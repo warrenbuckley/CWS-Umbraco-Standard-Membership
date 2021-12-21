@@ -10,7 +10,7 @@ using umbraco.cms.businesslogic.member;
 
 namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
 {
-    public class ProfileSurfaceController : SurfaceController
+    public class MemberProfileSurfaceController : SurfaceController
     {
         /// <summary>
         /// Renders the Login view
@@ -47,11 +47,13 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
         }
 
         [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult HandleEditProfile(ProfileViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return PartialView("EditProfile", model);
+                //return PartialView("EditProfile", model);
+                return CurrentUmbracoPage();
             }
 
             //Update the member with our data & save it down
@@ -70,7 +72,8 @@ namespace CWSUmbracoStandardMembership.Controllers.SurfaceControllers
             updateMember.Save();
 
             //Return the view
-            return PartialView("EditProfile", model);
+            //return PartialView("EditProfile", model);
+            return RedirectToAction("RenderMemberProfile", new { profileURLtoCheck = model.ProfileURL });
         }
 
         public ActionResult RenderMemberProfile(string profileURLtoCheck)

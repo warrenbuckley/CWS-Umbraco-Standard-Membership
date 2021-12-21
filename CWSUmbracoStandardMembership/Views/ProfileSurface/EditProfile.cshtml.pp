@@ -12,7 +12,8 @@
 @using(Html.BeginUmbracoForm<ProfileSurfaceController>("HandleEditProfile"))
 {
     @Html.ValidationSummary(true)
-
+    @Html.AntiForgeryToken()
+    
     <fieldset>
         <legend>Edit Profile</legend>
         

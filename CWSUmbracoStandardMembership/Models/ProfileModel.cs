@@ -19,14 +19,14 @@ namespace CWSUmbracoStandardMembership.Models
         [DisplayName("Email address")]
         [Required(ErrorMessage = "Please enter your email address")]
         [EmailAddress(ErrorMessage = "Please enter a valid email address")]
-        [Remote("CheckEmailIsUsed", "ProfileSurface", ErrorMessage = "The email address has already been registered")]
+        [Remote("CheckEmailIsUsed", "MemberProfileSurface", ErrorMessage = "The email address has already been registered")]
         public string EmailAddress { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         public string MemberType { get; set; }
 
         [Required]
-        [Remote("CheckProfileURLAvailable", "ProfileSurface", ErrorMessage = "The profile URL is already in use")]
+        [Remote("CheckProfileURLAvailable", "MemberProfileSurface", ErrorMessage = "The profile URL is already in use")]
         public string ProfileURL { get; set; }
 
         public string Description { get; set; }
